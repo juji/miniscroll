@@ -1,4 +1,4 @@
 miniscroll
 ==========
 
-A custom minimalist scrollbar for jQuery
+A minimalist scroll for pluging for jQuery.

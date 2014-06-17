@@ -1,7 +1,7 @@
 miniscroll
 =========
 
-A minimalist scroll for pluging for jQuery.
+A minimalist scroll plugin for jQuery.
 
 
 Why?

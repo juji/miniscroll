@@ -119,6 +119,13 @@
 			});
 			
 			$(this).on('movescroll',function(e,delta){
+
+				if(!scroll.height()){
+					scroll.css({'top':'0%'});
+					content.css({'top':0});
+					return;
+				}
+
 				ctop += (delta*o.delta);
 				var h = $(t).height() - $(content).outerHeight();
 				if(ctop>0) ctop=0; if(ctop<h) ctop = h;

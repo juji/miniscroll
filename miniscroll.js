@@ -11,7 +11,7 @@
 	
 	$.fn.miniscroll = function(opt){
 		var o = {
-			'delta':100,
+			'delta':41,
 			'animate':true
 		};
 		
@@ -30,6 +30,10 @@
 			else if(opt=='top'){
 				var to = 0;
 				delta = (pos - to) / odelta * -1;
+			}
+
+			else if(opt=='reset'){
+				reset.call(this);
 			}
 			
 			else if(/^\+/.test(opt)){

@@ -13,7 +13,7 @@
 		var o = {
 			'delta':41,
 			'animate':true,
-			'fullwitdh': true,
+			'fullwidth': true,
 			'changeid':false
 		};
 		
@@ -23,8 +23,13 @@
 			var odelta = $(this).data('__scrollopt').delta;
 			var pos = $('.content',this).position().top;
 			var delta = 0;
+
+			if(opt=='reset'){
+				reset.call(this);
+				return;
+			}
 			
-			if(opt=='bottom'){
+			else if(opt=='bottom'){
 				var to = $(this).height() - $('.content',this).outerHeight();
 				delta = (pos - to) / odelta * -1;
 			}
@@ -32,10 +37,6 @@
 			else if(opt=='top'){
 				var to = 0;
 				delta = (pos - to) / odelta * -1;
-			}
-
-			else if(opt=='reset'){
-				reset.call(this);
 			}
 			
 			else if(/^\+/.test(opt)){

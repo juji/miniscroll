@@ -8,13 +8,16 @@
 		<link rel="stylesheet" href="miniscroll.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 		<script src="miniscroll.js"></script>
+		<script>
+			$(function(){$('#havescroll').miniscroll({changeid:true});});
+		</script>
 		<style>
 			body,html{width:100%;height:100%;margin:0;padding:0;font-family:helvetica,arial;color:#444;font-size:14px;line-height:2.1em;min-width:1020px}#havescroll{width:700px;height:100%;overflow:auto;background-color:#fff}#havescroll .content{padding:5.5em}#main{width:100%;height:100%;padding:0;padding-left:300px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;background-color:#020202}#havescroll div.p,p,pre{margin-bottom:21px}#btns{position:fixed;height:100%;width:300px;border-right:1px solid #eaeaea;top:0;left:0;z-index:21;background-color:#f5f5f5}a{color:#0070FF}#btns a{display:block;line-height:48px;font-size:14px;padding-left:21px;text-decoration:none;color:#444}#btns a:hover{color:#fff;background-color:#0070FF}#btns h1{margin:0;font-size:21px;padding:13px;padding-left:21px;margin-bottom:21px}pre{padding:21px;background-color:#444;color:#ECECEC;border-left:4px solid #007FE2}pre em{font-style:normal;color:#86CFFF}code{display:inline-block;padding:0 8px;color:#E0002D;background-color:#EAEAEA;line-height:1.6em;border:1px solid #cecece;font-family:monospace}h1#mscroll_bigtitle{font-size:89px;margin-bottom:34px}
 		</style>
 	</head>
 	<body>
 		<div id="main">
-		<div class="miniscroll" id="havescroll"><div class="content">
+		<div id="havescroll"><div class="content">
 			<h1 id="bigtitle">miniscroll</h1>
 			<p>A minimalist scroll plugin for jQuery.</p>
 			<p><a target="_blank" href="https://github.com/juji/miniscroll">https://github.com/juji/miniscroll</a></p>
@@ -53,14 +56,26 @@ Auto initialization
 Manual initialization
 -------------------------
 
+IMPORTANT: do not use "miniscroll" as classname. 
+The auto initialization will execute first,
+and break your current settings.
+
+&lt;div class="<em>elm</em>"&gt;
+  &lt;div class="<em>content</em>"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
 $('.elm').<em>miniscrol</em>({
-  '<em>delta</em>' : 100,
-  '<em>animate</em>' : true
+  '<em>delta</em>' : 41,
+  '<em>animate</em>' : true,
+  '<em>fullwidth</em>' : true,
+  '<em>changeid</em>' : false
 });
 
 <small>-- The values above are the default values.</small>
 <small>delta : number of pixels moved on +1 deltaY mousewheel.</small>
 <small>animate : set animation on/off.</small>
+<small>fullwidth : set content as full width, or apply this width: content.width - scrollpne.width .</small>
+<small>changeid : change all [id] value into mscroll_[id].</small>
 
 PS: You should edit the css
 </pre>
@@ -70,13 +85,12 @@ PS: You should edit the css
 			<p>Click the buttons on the left.</p>
 			<br />
 			<br />
-			<br />
 			<h2 id="hash">Hash value</h2>
-			<p>To support <code>window.location.hash</code> values, and maintain functionality properly, we add the prefix 
-			<code>mscroll_</code> to all the element ID in your <code>.content</code>. So, you should prepare for this when styling elements
-			inside the <code>.content</code> based on their ID. You can see the example in the <a href="#bigtitle">title</a>.</p> 
+			<p>To support <code>window.location.hash</code> values, and maintain functionality properly, you can choose to add the prefix 
+			<code>mscroll_</code> to all the element ID in your content. You can do so by setting the option <code>changeid: true</code>. 
+			You can see the example in the <a href="#bigtitle">title</a>.</p> 
 			<p>
-				We don't listen to the <code>hashchange</code> event. Instead, we delegate clicks to <code>$('a[href^=#]')</code>. 
+				When <code>changeid: true</code>, We don't listen to the <code>hashchange</code> event. Instead, we delegate clicks to <code>$('a[href^=#]')</code>. 
 				That way, the hash-based-function will be triggerred even when <code>window.location.hash</code> does't change.
 			</p>
 			

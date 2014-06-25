@@ -92,8 +92,8 @@
 			var h = $(this).height() / $('.content',this).outerHeight();
 			if(h>1) h=0;
 			h = (h*100)+'%';
-			
-			$('.scrollindicator',this).css({'height': h });
+			$('.scrollindicator',this).css({'height': h,top:0 });
+			$('.content',this).css({top:0 });
 		}
 		
 		return $(this).each(function(){

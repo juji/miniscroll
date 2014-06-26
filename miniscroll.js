@@ -94,6 +94,7 @@
 			h = (h*100)+'%';
 			$('.scrollindicator',this).css({'height': h,top:0 });
 			$('.content',this).css({top:0 });
+			$(this).trigger('manualreset');
 		}
 		
 		return $(this).each(function(){
@@ -125,6 +126,10 @@
 			
 			$(this).on('mousewheel',function(e){
 				$(this).trigger('movescroll',[e.deltaY]);
+			});
+
+			$(this).on('manualreset',function(){
+				ctop = 0;
 			});
 			
 			$(this).on('movescroll',function(e,delta){

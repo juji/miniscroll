@@ -85,14 +85,19 @@
 			$(this).trigger('movescroll',delta);
 			return;
 		}
-		
-		function reset(){
+
+		function resetDimension(){
 			if(!$(this).data('__scrollopt').fullwidth)
 			$('.content',this).css({'width':$(this).width()-$('.scrollpane',this).width()});
 			var h = $(this).height() / $('.content',this).outerHeight();
 			if(h>1) h=0;
 			h = (h*100)+'%';
-			$('.scrollindicator',this).css({'height': h,top:0 });
+			$('.scrollindicator',this).css({'height': h });	
+		}
+		
+		function reset(){
+			resetDimension.call(this);
+			$('.scrollindicator',this).css({top:0});	
 			$('.content',this).css({top:0 });
 			$(this).trigger('manualreset');
 		}
@@ -115,12 +120,13 @@
 			var pane = $('.scrollpane',this);
 			
 			$(this).data('__scrollopt',o);
+			t.data('__scrollopt').height = t.find('.content').height();
 			
 			content.css({'position':'absolute','top':'0px','left':'0px'});
 			if(o.animate) $(t).addClass('scrollanim');
 			
 			$(window).on('resize.miniscroll',function(){
-				reset.call(t);
+				resetDimension.call(t);
 				$(this).trigger('movescroll',[1]);
 			});
 			
@@ -185,6 +191,14 @@
 			
 			if(window.location.hash && o.changeid)
 			$(t).miniscroll(window.location.hash);
+
+			setInterval(function(){
+				if(t.find('.content').height() == t.data('__scrollopt').height) return
+				t.data('__scrollopt').height = t.find('.content').height();
+				resetDimension.call(t);
+				$(this).trigger('movescroll',[1]);
+			},500);
+			
 		});
 	}
 	
